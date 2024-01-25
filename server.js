@@ -8,12 +8,27 @@ const server = http.createServer((req , res ) => {
         switch (req.url){
             case '/' :
                 path += 'index.html'
+                res.statusCode = 200;
                 break;
             case  '/about' :
                 path += 'about.html'
+                res.statusCode = 200;
                 break;
+            case '/about-me' :
+                res.statusCode = 301;
+                res.setHeader('location' , '/about')
+                res.end() 
+            case '/contact' :
+                path += '/contact.html'
+                res.statusCode = 200;
+                break;
+            case '/contact-me' : 
+            res.statusCode = 301;
+            res.setHeader('location' , '/contact') 
+            res.end();   
             default : 
-                path += '404.html'   
+                path += '404.html'
+                res.statusCode = 404;   
                 break;    
         }
 
@@ -25,6 +40,6 @@ const server = http.createServer((req , res ) => {
         })        
 })
 
-server.listen(3000 , 'localhost' , () => {
-    console.log(' server is running at port 3000')
+server.listen(8080 , 'localhost' , () => {
+    console.log(' server is running at port 8080')
 })
